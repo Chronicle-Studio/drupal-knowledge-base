@@ -5,3 +5,108 @@
  */
 
 include_once 'chronicle_knowledge_base.features.inc';
+
+/**
+ * Implements hook_menu().
+ */
+function chronicle_knowledge_base_menu() {
+  $items['knowledge-base'] = array(
+    'page callback' => 'chronicle_knowledge_base_view',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Menu callback: display article summary page.
+ */
+function chronicle_knowledge_base_view() {
+  $build = array();
+
+  // Set the title so that menu links can't mess it up.
+  drupal_set_title(t('Knowledge Base'));
+
+  $vocabulary = taxonomy_vocabulary_machine_name_load('knowledge_base_categories');
+  $tree = taxonomy_get_tree($vocabulary->vid);
+
+  $limit = variable_get('knowledge_base_list_limit', 5);
+
+  foreach ($tree as $term) {
+    if ($nids = taxonomy_select_nodes($term->tid, FALSE)) {
+      // Get count of selected node.
+      $count = count($nids);
+      // Cut out the extra nids if there are any.
+      $nids = array_slice($nids, 0, $limit);
+      // Load the node objects.
+      $nodes = node_load_multiple($nids);
+
+      $items = array();
+      foreach ($nodes as $node) {
+        $items[$node->nid] = theme('chronicle_knowledge_base_list_item', array('node' => $node, 'term' => $term));
+      }
+
+      $view_more = theme('chronicle_knowledge_base_view_all_link', array('term' => $term));
+
+      $build['topics'][$term->tid] = array(
+        '#theme' => 'chronicle_knowledge_base_list',
+        '#items' => $items,
+        '#term' => $term,
+        '#count' => $count,
+        '#limit' => $limit,
+      );
+    }
+  }
+
+  return $build;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function chronicle_knowledge_base_theme() {
+  return array(
+    'chronicle_knowledge_base_list' => array(
+      'variables' => array('items' => NULL, 'term' => NULL, 'count' => NULL, 'limit' => NULL),
+      'template' => 'chronicle-knowledge-base-list'
+    ),
+    'chronicle_knowledge_base_list_item' => array(
+      'variables' => array('node' => NULL, 'term' => NULL),
+    ),
+  );
+}
+
+/**
+ * Returns the knowledge base list item node link.
+ *
+ * @param $variables
+ *   An associative array containing:
+ *   - node: The loaded node object.
+ *   - term: The loaded term object.
+ */
+function theme_chronicle_knowledge_base_list_item($variables) {
+  $node = $variables['node'];
+  return l(t($variables['node']->title), 'node/' . $variables['node']->nid);
+}
+
+/**
+ * Preprocess variables for chronicle-knowledge-base-list.tpl.php
+ *
+ * The $variables array contains the following arguments:
+ * - $count
+ * - $items
+ * - $limit
+ * - $term
+ *
+ * @see chronicle-knowledge-base-list.tpl.php
+ */
+function template_preprocess_chronicle_knowledge_base_list(&$variables) {
+  $term = $variables['term'];
+  $variables['classes_array'][] = 'topic';
+  $variables['classes_array'][] = 'topic--' . drupal_html_class($term->name);
+
+  $variables['classes'] = implode(' ', $variables['classes_array']);
+  $variables['term_url'] = url('taxonomy/term/' . $term->tid);
+  $variables['article_list'] = theme('item_list', array('items' => $variables['items']));
+}
