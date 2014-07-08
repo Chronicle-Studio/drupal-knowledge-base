@@ -72,6 +72,20 @@ function chronicle_knowledge_base_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_knowledge_base_article_pattern';
+  $strongarm->value = 'knowledge-base/articles/[node:title]';
+  $export['pathauto_node_knowledge_base_article_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_taxonomy_term_knowledge_base_categories_pattern';
+  $strongarm->value = 'knowledge-base/topics/[term:name]';
+  $export['pathauto_taxonomy_term_knowledge_base_categories_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'weight_enabled_knowledge_base_article';
   $strongarm->value = '1';
   $export['weight_enabled_knowledge_base_article'] = $strongarm;
