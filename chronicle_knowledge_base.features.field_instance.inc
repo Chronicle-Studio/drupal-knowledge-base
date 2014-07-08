@@ -10,8 +10,8 @@
 function chronicle_knowledge_base_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-knowledge_base_article-field_knowledge_base_categories'
-  $field_instances['node-knowledge_base_article-field_knowledge_base_categories'] = array(
+  // Exported field_instance: 'node-knowledge_base_article-field_knowledge_base_category'
+  $field_instances['node-knowledge_base_article-field_knowledge_base_category'] = array(
     'bundle' => 'knowledge_base_article',
     'default_value' => NULL,
     'deleted' => 0,
@@ -33,8 +33,8 @@ function chronicle_knowledge_base_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_knowledge_base_categories',
-    'label' => 'Categories',
+    'field_name' => 'field_knowledge_base_category',
+    'label' => 'Category',
     'required' => 1,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -150,7 +150,7 @@ function chronicle_knowledge_base_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Body');
-  t('Categories');
+  t('Category');
   t('Image');
 
   return $field_instances;
