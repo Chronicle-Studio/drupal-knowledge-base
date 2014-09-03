@@ -36,7 +36,7 @@
   </div>
 
   <?php if ($count > $limit): ?>
-    <a href="<?php print $term_url; ?>" class="view-more" rel="nofollow">View all articles</a>
+    <a href="<?php print $term_url; ?>" class="view-more" rel="nofollow"><?php print t('View all articles'); ?></a>
   <?php endif; ?>
 
 </div>
