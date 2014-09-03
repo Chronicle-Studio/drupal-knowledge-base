@@ -91,11 +91,11 @@ function theme_chronicle_knowledge_base_list_item($variables) {
 /**
  * Preprocess variables for chronicle-knowledge-base-list.tpl.php
  *
- * The $variables array contains the following arguments:
- * - $count
- * - $items
- * - $limit
- * - $term
+ * The $variables array contains the following items:
+ * - count: The total number of articles found in the term.
+ * - items: An array of themed articles to be used with theme_item_list().
+ * - limit: The amount of articles to be displayed out of the total.
+ * - term: The term associated to each article.
  *
  * @see chronicle-knowledge-base-list.tpl.php
  */
