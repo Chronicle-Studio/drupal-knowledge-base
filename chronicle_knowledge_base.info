@@ -30,5 +30,6 @@ features[variable][] = node_submitted_knowledge_base_article
 features[variable][] = pathauto_node_knowledge_base_article_pattern
 features[variable][] = pathauto_taxonomy_term_knowledge_base_categories_pattern
 features[variable][] = weight_enabled_knowledge_base_article
+features[views_view][] = knowledge_base_admin
 features[views_view][] = knowledge_base_search
 features[weight][] = knowledge_base_article
