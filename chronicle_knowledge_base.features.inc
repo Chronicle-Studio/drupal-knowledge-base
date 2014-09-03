@@ -44,7 +44,7 @@ function chronicle_knowledge_base_weight_features_default_settings() {
   $settings = array();
 
   $settings['knowledge_base_article'] = array(
-    'enabled' => 1,
+    'enabled' => 0,
     'range' => 20,
     'menu_weight' => 0,
     'default' => 0,

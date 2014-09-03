@@ -87,7 +87,7 @@ function chronicle_knowledge_base_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'weight_enabled_knowledge_base_article';
-  $strongarm->value = '1';
+  $strongarm->value = '0';
   $export['weight_enabled_knowledge_base_article'] = $strongarm;
 
   return $export;
