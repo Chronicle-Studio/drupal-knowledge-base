@@ -110,3 +110,12 @@ function template_preprocess_chronicle_knowledge_base_list(&$variables) {
   $variables['term_url'] = url('taxonomy/term/' . $term->tid);
   $variables['article_list'] = theme('item_list', array('items' => $variables['items']));
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function chronicle_knowledge_base_form_knowledge_base_article_node_form_alter(&$form, &$form_state, $form_id) {
+  // Move sticky out of the promotion fieldset.
+  $form['sticky'] = $form['options']['sticky'];
+  unset($form['options']['sticky']);
+}
