@@ -47,8 +47,6 @@ function chronicle_knowledge_base_view() {
         $items[$node->nid] = theme('chronicle_knowledge_base_list_item', array('node' => $node, 'term' => $term));
       }
 
-      $view_more = theme('chronicle_knowledge_base_view_all_link', array('term' => $term));
-
       $build['topics'][$term->tid] = array(
         '#theme' => 'chronicle_knowledge_base_list',
         '#items' => $items,
